@@ -1,8 +1,13 @@
 import './App.css'
+import { GroupForm } from './components/GroupForm'
+import { BalanceTracker } from './components/BalanceTracker'
 
 function App() {
   return (
-    <h1>Hello, World</h1>
+    <>
+      <GroupForm />
+      <BalanceTracker />
+    </>
   )
 }
 
