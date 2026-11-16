@@ -1,10 +1,9 @@
 import express from "express";
+import { groupsRouter } from "./routes/groups.js";
 
 const app = express();
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
-  res.json({ ok: true });
-});
+app.use("/api/groups", groupsRouter)
 
 app.listen(3000, () => console.log("API on :3000"));
