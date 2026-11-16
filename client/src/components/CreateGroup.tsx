@@ -1,5 +1,3 @@
-import { addToFile, readFile } from "../api/jsonActions.ts"
-
 export function CreateGroup() {
   const participators : string[] = []
 
@@ -13,17 +11,28 @@ export function CreateGroup() {
     console.log(participators)
   }
 
-  function saveGroup () {
+  async function saveGroup (e: React.FormEvent) {
+    e.preventDefault()
+
     const groupName = (document.getElementById('groupName') as HTMLInputElement).value
+    console.log("Kaka")
 
     if(groupName != "" && participators.length > 1) {
-      addToFile('../data/groups.json', {})
+      const res = await fetch("/api/groups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ok: "ok"}),
+      })
+      if(!res.ok) res.json()
+      const newGroup = await res.json()
+      console.log(newGroup)
     }
   }
 
 
   return(
-    <>
+    
+    <form onSubmit={saveGroup}>
       <h1>Create new Group</h1>
       <input id="groupName" type="text" placeholder="Group name (e.g. Budapest trip)" required/>
       <input id="partInp" type="text" placeholder="Participator Name" required/>
@@ -32,7 +41,7 @@ export function CreateGroup() {
         <li>Participator 1</li>
         <li>Participator 2</li>
       </ul>
-      <button onClick={() => saveGroup()}>Create</button>
-    </>
+      <button type="submit">Create</button>
+    </form>
   )
 }
