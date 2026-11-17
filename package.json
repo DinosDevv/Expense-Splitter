@@ -10,15 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/DinosDevv/Expense-Splitter.git"
   },
+  "workspaces": [
+    "client",
+    "server",
+    "packages/shared"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/DinosDevv/Expense-Splitter/issues"
   },
   "homepage": "https://github.com/DinosDevv/Expense-Splitter#readme",
   "dependencies": {
-    "body-parser": "^2.4.0"
+    "body-parser": "^2.4.0",
+    "@expense-splitter/shared": "*"
   }
 }
