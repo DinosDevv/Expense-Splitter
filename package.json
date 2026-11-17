@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/DinosDevv/Expense-Splitter/issues"
   },
-  "homepage": "https://github.com/DinosDevv/Expense-Splitter#readme"
+  "homepage": "https://github.com/DinosDevv/Expense-Splitter#readme",
+  "dependencies": {
+    "body-parser": "^2.4.0"
+  }
 }

@@ -11,21 +11,26 @@ export function CreateGroup() {
     console.log(participators)
   }
 
-  async function saveGroup (e: React.FormEvent) {
+  function saveGroup (e: React.FormEvent) {
     e.preventDefault()
 
     const groupName = (document.getElementById('groupName') as HTMLInputElement).value
-    console.log("Kaka")
+
+    console.log(participators.length)
+    console.log(groupName)
 
     if(groupName != "" && participators.length > 1) {
-      const res = await fetch("/api/groups", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ok: "ok"}),
-      })
-      if(!res.ok) res.json()
-      const newGroup = await res.json()
-      console.log(newGroup)
+      try {
+        fetch("/api/groups", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ok: "ok"})
+        }).then(() => {
+          console.log("Done")
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
