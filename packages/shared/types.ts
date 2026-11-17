@@ -1,4 +1,4 @@
 export interface Group {
   name: string,
-  participators: []
+  participators: string[]
 }

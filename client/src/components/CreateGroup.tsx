@@ -1,3 +1,5 @@
+import { Group } from '@expense-splitter/shared/types.ts'
+
 export function CreateGroup() {
   const participators : string[] = []
 
@@ -20,7 +22,7 @@ export function CreateGroup() {
     console.log(groupName)
 
     if(groupName != "" && participators.length > 1) {
-      const groupObject = {
+      const groupObject : Group = {
         name: groupName,
         participators: participators
       }
