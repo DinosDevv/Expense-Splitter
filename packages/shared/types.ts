@@ -1,4 +1,10 @@
 export interface Group {
   name: string,
-  participators: string[]
+  participators: Participator[
+    
+  ]
+}
+export interface Participator {
+  name: string,
+  balance: number
 }

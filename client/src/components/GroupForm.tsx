@@ -25,7 +25,13 @@ export function GroupForm() {
           <h1>{group.name}</h1>
           <ul>
             {group.participators.map(participator => 
-              <li key={participator}>{participator}</li>
+              <li key={participator.name}>
+                {participator.name}
+                <input type="text" placeholder="Add Expense"/>
+                <button>+</button>  
+                <p>{1>0 ? "is Owed" : "owes"}</p>
+
+              </li>
             )}
           </ul>
         </div>

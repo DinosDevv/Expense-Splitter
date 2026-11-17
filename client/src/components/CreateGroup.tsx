@@ -1,4 +1,4 @@
-import { Group } from '@expense-splitter/shared/types.ts'
+import { Group, Participator } from '@expense-splitter/shared/types.ts'
 
 export function CreateGroup() {
   const participators : string[] = []
@@ -22,9 +22,15 @@ export function CreateGroup() {
     console.log(groupName)
 
     if(groupName != "" && participators.length > 1) {
+      const participatorsObj : Participator[] = []
+      for(const participator of participators) {
+        const part : Participator = {name: participator, balance: 0}
+        participatorsObj.push(part)
+      }
+
       const groupObject : Group = {
         name: groupName,
-        participators: participators
+        participators: participatorsObj
       }
 
       try {
