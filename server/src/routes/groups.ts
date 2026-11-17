@@ -8,6 +8,6 @@ groupsRouter.get("/", (req, res) => {
 groupsRouter.post("/", (req, res) => {
   
   if(req.body) console.log(req.body)
-
+  
 
 })

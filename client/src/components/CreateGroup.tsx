@@ -20,11 +20,16 @@ export function CreateGroup() {
     console.log(groupName)
 
     if(groupName != "" && participators.length > 1) {
+      const groupObject = {
+        name: groupName,
+        participators: participators
+      }
+
       try {
         fetch("/api/groups", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ok: "ok"})
+          body: JSON.stringify(groupObject)
         }).then(() => {
           console.log("Done")
         })
