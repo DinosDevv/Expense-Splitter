@@ -1,10 +1,10 @@
 import { Router } from "express"
-import { createGroup } from '../services/groups.js'
+import { createGroup, getGroups } from '../services/groups.js'
 
 export const groupsRouter = Router() 
 
 groupsRouter.get("/", (req, res) => {
-  res.send({ groups: "Yes" })
+  res.send(getGroups())
 })
 groupsRouter.post("/", (req, res) => {
   
