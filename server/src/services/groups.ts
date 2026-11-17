@@ -4,3 +4,6 @@ import { readFile, writeFile } from '../db/groupStore.js'
 export function createGroup(group: Group) {
   writeFile(group)
 }
+export function getGroups() {
+  return readFile()
+}
