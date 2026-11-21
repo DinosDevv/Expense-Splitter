@@ -18,7 +18,7 @@ groupsRouter.get("/handleExpense", (req, res) => {
 })
 groupsRouter.post("/handleExpense", (req, res) => {
   if(req.body) console.log(req.body)
-  addExpense(req.body.name, req.body.amount)
+  addExpense(req.body)
 
   res.status(201).json(req.body);
 

@@ -26,4 +26,27 @@ export function writeFile(content: Group) {
     console.log(err)
   }
 }
+export function replaceItem(group: Group) {
+  let dataToStore = readFile()
+
+  for(const item of dataToStore) {
+    if(item == group) {
+      const index = dataToStore.indexOf(item)
+      if(index > -1) {
+        dataToStore.splice(index, 1)
+        dataToStore.push(group)
+      }
+    }
+  }
+  try {
+    fs.writeFile(`${PATH}`, JSON.stringify(dataToStore, null, 2), (err) => {
+      if(err) {
+        console.log(`Error: ${err.message}`)
+        return false
+      }
+    })
+  } catch(err) {
+    console.log(err)
+  }
+}
 
