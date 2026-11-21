@@ -12,10 +12,7 @@ export function GroupForm() {
       .then((json) => {
         setGroups(json)
       })
-  }, [])
-
-  console.log(groups)
-
+  }, [])  
   return groups.length==0 ? (
     <>
       <h1>No availabe groups!</h1>
@@ -23,7 +20,7 @@ export function GroupForm() {
   ) : (
     <>
       {groups.map(group => 
-        <ExpenseGroup group={group}/>
+        <ExpenseGroup key={group.name} group={group}/>
       )}
     </>
   )

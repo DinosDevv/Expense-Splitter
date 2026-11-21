@@ -11,7 +11,7 @@ export function ExpenseGroup({ group }: GroupProps) {
       <h1>{group.name}</h1>
       <ul>
         {group.participators.map(participator => 
-          <Participator name={participator.name} balance={participator.balance} />
+          <Participator groupName={group.name} key={participator.name} name={participator.name} balance={participator.balance} />
         )}
       </ul>
     </div>

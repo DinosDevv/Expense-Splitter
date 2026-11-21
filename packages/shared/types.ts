@@ -8,3 +8,8 @@ export interface Participator {
   name: string,
   balance: number
 }
+export interface Expense {
+  groupName: string,
+  name: string,
+  amount: number
+}

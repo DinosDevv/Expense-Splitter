@@ -3,27 +3,6 @@ import fs from 'fs'
 
 const PATH = 'data/groups.json'
 
-// function checkFolder() {
-//   try {
-//     if (!fs.existsSync(PATH)) {
-//       fs.mkdirSync(PATH);
-//       fs.writeFile(entriesPath, JSON.stringify([], null, 2), (err) => {
-//         if(err) {
-//           console.log(`Error: ${err.message}`)
-//         }
-//       })
-//       fs.writeFile(sessionsPath, JSON.stringify([], null, 2), (err) => {
-//         if(err) {
-//           console.log(`Error: ${err.message}`)
-//         }
-//       })
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-
-// }
-
 export function readFile() {
   try {
     const data = fs.readFileSync(`${PATH}`, 'utf8')

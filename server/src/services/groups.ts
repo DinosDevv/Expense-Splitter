@@ -7,3 +7,6 @@ export function createGroup(group: Group) {
 export function getGroups() {
   return readFile()
 }
+export function addExpense(name : string, amount: number) {
+  console.log(`${name}: ${amount}`)
+}
