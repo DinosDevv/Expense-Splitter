@@ -6,8 +6,9 @@ interface ParticipatorProps{
 export function Participator({ name, balance } : ParticipatorProps) {
   return(
     <>
-      <h1>{name}</h1>
-      <input type="text" placeholder="Add Expense"/>
+      <p>{name}</p>
+      <input type="text" placeholder="Expense Name"/>
+      <input type="number" placeholder="Expense Value"/>
       <button>+</button>
       <p>{balance > 0 ? "Owes" : "Is Owed"} {Math.abs(balance)}</p>
     </>

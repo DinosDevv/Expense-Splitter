@@ -1,6 +1,6 @@
 import { Group } from "@expense-splitter/shared/types"
 import { useEffect, useState } from "react"
-import { Participator } from "./Participator.tsx"
+import { ExpenseGroup } from "./ExpenseGroup.tsx"
 
 export function GroupForm() {
   const [groups, setGroups] = useState<Group[]>([])
@@ -23,14 +23,7 @@ export function GroupForm() {
   ) : (
     <>
       {groups.map(group => 
-        <div>
-          <h1>{group.name}</h1>
-          <ul>
-            {group.participators.map(participator => 
-              <Participator name={participator.name} balance={participator.balance} />
-            )}
-          </ul>
-        </div>
+        <ExpenseGroup group={group}/>
       )}
     </>
   )
