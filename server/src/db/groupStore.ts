@@ -30,7 +30,7 @@ export function replaceItem(group: Group) {
   let dataToStore = readFile()
 
   for(const item of dataToStore) {
-    if(item == group) {
+    if(item.name == group.name) {
       const index = dataToStore.indexOf(item)
       if(index > -1) {
         dataToStore.splice(index, 1)
