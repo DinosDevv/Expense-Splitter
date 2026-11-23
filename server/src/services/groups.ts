@@ -15,45 +15,51 @@ function getGroup(groupName : string) {
   }
 }
 function settleDebt(group: Group, expense: Expense) : Group{
-  // Examine whether there are other creditors
-
+  const participators : Participator[] = group.participators
   const creditors : Participator[] = []
-  for(const participator of group.participators) {
-    if(participator.balance < 0) {
+
+  for(const participator of participators) {
+    if(participator.name != expense.name && participator.balance < 0) {
       creditors.push(participator)
     }
   }
 
-  // If yes: Find the best creditor by implementing a greedy algorithm that finds the min of balances
+  const creditorBalances : number[] = []
 
-  if(creditors.length > 0) {
-    let amount : number = expense.amount
+  let amount = expense.amount
 
-    while(amount > 0) {
-      const balances : number[] = []
+
+  while(amount > 0) {
+  
+    if(creditors.length > 0) {
       for(const creditor of creditors) {
-        balances.push(creditor.balance)
+        creditorBalances.push(creditor.balance)
       }
-      const iOfBestCreditor = balances.indexOf(Math.min.apply(null, balances))
-      if(Math.abs(creditors[iOfBestCreditor].balance) >= amount) {
+      const iOfBestCreditor = creditorBalances.indexOf(Math.min.apply(null, creditorBalances))
+      
+      if(amount > Math.abs(creditors[iOfBestCreditor].balance)) {
+        amount -= Math.abs(creditors[iOfBestCreditor].balance)
+        creditors[iOfBestCreditor].balance += Math.abs(creditors[iOfBestCreditor].balance)
+      } else {
         creditors[iOfBestCreditor].balance += amount
         amount = 0
-        break
-      } else {
-        const tempAmount = amount
-        amount -= Math.abs(creditors[iOfBestCreditor].balance)
-        creditors[iOfBestCreditor].balance += tempAmount
       }
-    }
-
-  } else {
-    // If no: Increase each debtor's balance by expense amount / participators.length - 1
-    for(const participator of group.participators) {
-      if(participator.name != expense.name) {
-        participator.balance += expense.amount / (group.participators.length - 1)
+      // creditors[iOfBestCreditor] += expense
+    } else {
+      const nonCreditors : Participator[] = []
+      for(const participator of participators) {
+        if(participator.name != expense.name && !creditors.includes(participator)) {
+          nonCreditors.push(participator)
+        }
       }
+      for(const nonCreditor of nonCreditors) {
+        nonCreditor.balance += amount/nonCreditors.length
+      }
+      amount = 0
     }
+    if(amount <= 0) break
   }
+
   return group
 }
 
@@ -62,7 +68,7 @@ export function addExpense(expense : Expense) {
 
   // Each expense is subtracted from the creditor's balance
 
-  for(const participator of group.participators) if(participator == expense.name) participator.balance -= expense.amount
+  for(const participator of group.participators) if(participator.name === expense.name) participator.balance -= expense.amount
   group = settleDebt(group, expense)
 
   replaceItem(group)
