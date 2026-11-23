@@ -50,7 +50,7 @@ export function HomePage() {
   return (
     <div className="container">
       <div className="groupSum">
-        <GroupSum />
+        <GroupSum group={group}/>
       </div>
       <div className="membersCard">
         <MembersCard group={group}/>
@@ -59,7 +59,7 @@ export function HomePage() {
         <RecentExpenses />
       </div>
       <div className="groupBalance">
-        <GroupBalance />
+        <GroupBalance group={group}/>
       </div>
       <div className="addExpense">
         <AddExpense group={group}/>
