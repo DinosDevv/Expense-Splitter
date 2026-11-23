@@ -1,45 +1,100 @@
 import './AddExpense.css'
 import { Group } from '@expense-splitter/shared/types'
+import { useState } from "react"
 
-interface compProps {
+interface AddExpenseProps {
   group: Group
 }
 
-export function AddExpense({ group } : compProps) {
+export function AddExpense({ group }: AddExpenseProps) {
+  const [description, setDescription] = useState("")
+  const [amountInput, setAmountInput] = useState("")
+  const [payer, setPayer] = useState("")
+  const [error, setError] = useState("")
+  const [saving, setSaving] = useState(false)
+
+  const amountCents = Math.round(Number(amountInput) * 100)
+  const validAmount = Number.isFinite(amountCents) && amountCents > 0
+
+  async function handleExpense(e: React.FormEvent) {
+    e.preventDefault()
+    if (!validAmount) return setError("Enter an amount above 0")
+    if (!payer) return setError("Pick who paid")
+
+    setSaving(true)
+    setError("")
+    try {
+      const res = await fetch(`/api/groups/handleExpense`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          groupName: group.name,
+          name: payer,
+          description: description.trim(),
+          amount: amountCents,
+        }),
+      })
+      if (!res.ok) throw new Error(`Server responded ${res.status}`)
+      setDescription("")
+      setAmountInput("")
+      setPayer("")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err))
+    } finally {
+      setSaving(false)
+    }
+  }
+
   return(
-    <div className="add-expense">
+    <form onSubmit={handleExpense} className="add-expense">
       <div className="left">
         <h1>Add Expense</h1>
-        
+
         <div>
-          <label htmlFor='description'>Description</label>
-          <input type="text" id="description" placeholder='e.g. Dinner, Uber, Tickets...'/>          
+          <label htmlFor="description">Description</label>
+          <input
+            id="description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="e.g. Dinner, Uber, Tickets..."
+          />
         </div>
 
         <div>
           <label htmlFor="amount">Amount (€)</label>
-          <input type="number" placeholder='0.00'/>
+          <input
+            id="amount"
+            type="number"
+            step="0.01"
+            min="0.01"
+            value={amountInput}
+            onChange={e => setAmountInput(e.target.value)}
+            placeholder="0.00"
+            required
+          />
         </div>
 
         <div>
           <label htmlFor="payer">Paid by</label>
-          <select name="payer" id="payer">
-            {group.participators.map(p => 
+          <select id="payer" value={payer} onChange={e => setPayer(e.target.value)} required>
+            <option value="" disabled>Who paid?</option>
+            {group.participators.map(p => (
               <option key={p.name} value={p.name}>{p.name}</option>
-            )}
+            ))}
           </select>
         </div>
 
-        <div>
-          <label htmlFor="split">Split Between</label>
-          <div id="split">
-            <button>Everyone (Equally)</button>
-            <button>Custom Amounts</button>
-            <button>Percentages</button>
-          </div>
-        </div>
+        <fieldset>
+          <legend>Split between</legend>
+          <button type="button">Everyone (Equally)</button>
+          <button type="button" disabled>Custom Amounts</button>
+          <button type="button" disabled>Percentages</button>
+        </fieldset>
 
-        <button>Add Expense</button>
+        {error && <p className="error">{error}</p>}
+        <button type="submit" disabled={saving}>
+          {saving ? "Adding…" : "Add Expense"}
+        </button>
       </div>
       <div className="right">
         <label htmlFor="preview">Preview</label>
@@ -49,6 +104,6 @@ export function AddExpense({ group } : compProps) {
         </div>
         <p>Each Person will pay: 67.00€</p>
       </div>
-    </div>
+    </form>
   )
 }

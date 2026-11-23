@@ -1,4 +1,3 @@
-import { CreateGroup } from '../components/CreateGroup'
 import { AddExpense } from "../components/AddExpense"
 import { MembersCard } from '../components/MembersCard'
 
@@ -48,7 +47,6 @@ export function HomePage() {
     <div className="container">
       <MembersCard group={group}/>
       <AddExpense group={group}/>
-      <CreateGroup />
     </div>
   )
 }
