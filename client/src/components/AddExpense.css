@@ -3,9 +3,9 @@
   flex-direction: row;
   margin-bottom: 100px; /* TO BE REMOVED OBVIOUSLY */
   background-color: #1C1C28;
-  color: white;
   border-radius: 15px;
   border: 2px solid #292A35;
+  color: white;
   gap: 20px;
 }
 .left {
