@@ -3,9 +3,9 @@ import { CreateGroup } from '../components/CreateGroup'
 import { SideNav } from '../components/SideNav'
 import { AddExpense } from "../components/AddExpense"
 
-import './MainPage.css'
+import './HomePage.css'
 
-export function MainPage() {
+export function HomePage() {
 
   return (
     <div className="container">

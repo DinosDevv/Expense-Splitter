@@ -4,10 +4,10 @@ export function SideNav() {
 
   return(  
     <div id="mySidenav" className="sidenav">
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <a href="#">Home</a>
+      <a href="#">Groups</a>
+      <a href="#">Stats</a>
+      <a href="#">Settings</a>
     </div>
   )
 }

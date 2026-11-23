@@ -1,64 +1,70 @@
 import { Group, Participator } from '@expense-splitter/shared/types.ts'
+import { useState } from 'react'
 
 export function CreateGroup() {
-  const participators : string[] = []
+  const [groupName, setGroupName] = useState("")
+  const [partInput, setPartInput] = useState("")
+  const [partNames, setPartNames] = useState<string[]>([])
+  const [error, setError] = useState("")
 
   function addParticipator() {
-    const partInp = document.getElementById('partInp') as HTMLInputElement
-
-    if(partInp.value != "") participators.push(partInp.value)
-    partInp.value = ""
-
-
-    console.log(participators)
+    const name = partInput.trim()
+    if (name === "") return
+    if (partNames.includes(name)) {
+      setError(`${name} is already in the group`)
+      return
+    }
+    setPartNames(prev => [...prev, name])
+    setPartInput("")
+    setError("")
   }
 
-  function saveGroup (e: React.FormEvent) {
+  async function saveGroup(e: React.FormEvent) {
     e.preventDefault()
+    if (groupName.trim() === "" || partNames.length < 2) {
+      setError("Need a group name and at least 2 people")
+      return
+    }
 
-    const groupName = (document.getElementById('groupName') as HTMLInputElement).value
+    const group: Group = {
+      name: groupName.trim(),
+      participators: partNames.map((name): Participator => ({ name, balance: 0 })),
+    }
 
-    console.log(participators.length)
-    console.log(groupName)
-
-    if(groupName != "" && participators.length > 1) {
-      const participatorsObj : Participator[] = []
-      for(const participator of participators) {
-        const part : Participator = {name: participator, balance: 0}
-        participatorsObj.push(part)
-      }
-
-      const groupObject : Group = {
-        name: groupName,
-        participators: participatorsObj
-      }
-
-      try {
-        fetch("/api/groups", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(groupObject)
-        }).then(() => {
-          console.log("Done")
-        })
-      } catch (err) {
-        console.log(err)
-      }
+    try {
+      const res = await fetch("/api/groups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(group),
+      })
+      if (!res.ok) throw new Error(`Server responded ${res.status}`)
+      setGroupName("")
+      setPartNames([])
+    } catch (err) {
+      setError(String(err))
     }
   }
 
-
-  return(
-    
+  return (
     <form onSubmit={saveGroup}>
       <h1>Create new Group</h1>
-      <input id="groupName" type="text" placeholder="Group name (e.g. Budapest trip)" required/>
-      <input id="partInp" type="text" placeholder="Participator Name" required/>
-      <button onClick={() => addParticipator()}>Add</button>
+      <input
+        value={groupName}
+        onChange={e => setGroupName(e.target.value)}
+        placeholder="Group name (e.g. Budapest trip)"
+        required
+      />
+      <input
+        value={partInput}
+        onChange={e => setPartInput(e.target.value)}
+        onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addParticipator() } }}
+        placeholder="Participator name"
+      />
+      <button type="button" onClick={addParticipator}>Add</button>
       <ul>
-        <li>Participator 1</li>
-        <li>Participator 2</li>
+        {partNames.map(p => <li key={p}>{p}</li>)}
       </ul>
+      {error && <p>{error}</p>}
       <button type="submit">Create</button>
     </form>
   )
