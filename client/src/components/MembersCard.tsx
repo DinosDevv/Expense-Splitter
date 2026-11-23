@@ -1,4 +1,5 @@
 import { Group } from "@expense-splitter/shared/types"
+import './MembersCard.css'
 
 interface compProps {
   group: Group

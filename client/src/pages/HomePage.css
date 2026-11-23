@@ -1,4 +1,30 @@
+body{
+  color: white;
+}
+
 .container{
-  display: flex;
-  height: 100%;
+  display: grid;
+  margin-left: 250px;
+  grid-template-areas: 
+    "group_sum members_card"
+    "recent_exp group_balance"
+    "add_exp add_exp";
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 5rem 5rem 5rem 20rem;
+}
+.membersCard {
+  grid-area: members_card;
+}
+.addExpense {
+  grid-area: add_exp;
+}
+.recentExpenses {
+  grid-area: recent_exp;
+}
+.groupSum {
+  grid-area: group_sum;
+}
+.groupBalance {
+  grid-area: group_balance;
 }
