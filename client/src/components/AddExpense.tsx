@@ -6,23 +6,31 @@ export function AddExpense() {
       <div className="left">
         <h1>Add Expense</h1>
         
-        <label htmlFor='description'>Description</label>
-        <input type="text" id="description" placeholder='e.g. Dinner, Uber, Tickets...'/>
+        <div>
+          <label htmlFor='description'>Description</label>
+          <input type="text" id="description" placeholder='e.g. Dinner, Uber, Tickets...'/>          
+        </div>
 
-        <label htmlFor="amount">Amount (€)</label>
-        <input type="number" placeholder='0.00'/>
+        <div>
+          <label htmlFor="amount">Amount (€)</label>
+          <input type="number" placeholder='0.00'/>
+        </div>
 
-        <label htmlFor="payer">Paid by</label>
-        <select name="payer" id="payer">
-          <option value="guy1">Guy 1</option>
-          <option value="guy2">Guy 2</option>
-        </select>
+        <div>
+          <label htmlFor="payer">Paid by</label>
+          <select name="payer" id="payer">
+            <option value="guy1">Guy 1</option>
+            <option value="guy2">Guy 2</option>
+          </select>
+        </div>
 
-        <label htmlFor="split">Split Between</label>
-        <div id="split">
-          <button>Everyone (Equally)</button>
-          <button>Custom Amounts</button>
-          <button>Percentages</button>
+        <div>
+          <label htmlFor="split">Split Between</label>
+          <div id="split">
+            <button>Everyone (Equally)</button>
+            <button>Custom Amounts</button>
+            <button>Percentages</button>
+          </div>
         </div>
 
         <button>Add Expense</button>
