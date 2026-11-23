@@ -26,6 +26,7 @@ function settleDebt(group: Group, expense: Expense) : Group{
 
 export function addExpense(expense : Expense) {
   let group = getGroup(expense.groupName)
+  group.expenses.push(expense)
 
   // Each expense is subtracted from the creditor's balance
 

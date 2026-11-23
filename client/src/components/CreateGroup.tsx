@@ -29,6 +29,7 @@ export function CreateGroup() {
     const group: Group = {
       name: groupName.trim(),
       participators: partNames.map((name): Participator => ({ name, balance: 0 })),
+      expenses: []
     }
 
     try {

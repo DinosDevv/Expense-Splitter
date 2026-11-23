@@ -2,6 +2,9 @@ export interface Group {
   name: string,
   participators: Participator[
     
+  ],
+  expenses: Expense [
+    
   ]
 }
 export interface Participator {

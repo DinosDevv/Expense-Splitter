@@ -27,7 +27,8 @@ export function HomePage() {
         "name": "asdef",
         "balance": 4433
       }
-    ]
+    ],
+    "expenses": []
   }
   const [group, setGroup] = useState<Group>(testGroup)
 
