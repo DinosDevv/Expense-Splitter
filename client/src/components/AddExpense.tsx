@@ -1,6 +1,11 @@
 import './AddExpense.css'
+import { Group } from '@expense-splitter/shared/types'
 
-export function AddExpense() {
+interface compProps {
+  group: Group
+}
+
+export function AddExpense({ group } : compProps) {
   return(
     <div className="add-expense">
       <div className="left">
@@ -19,8 +24,9 @@ export function AddExpense() {
         <div>
           <label htmlFor="payer">Paid by</label>
           <select name="payer" id="payer">
-            <option value="guy1">Guy 1</option>
-            <option value="guy2">Guy 2</option>
+            {group.participators.map(p => 
+              <option key={p.name} value={p.name}>{p.name}</option>
+            )}
           </select>
         </div>
 
