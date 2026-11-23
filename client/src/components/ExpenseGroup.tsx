@@ -1,5 +1,6 @@
 import { Group } from "@expense-splitter/shared/types.ts"
 import { Participator } from "./Participator.tsx"
+import './ExpenseGroup.css'
 
 interface GroupProps {
   group: Group
@@ -7,7 +8,7 @@ interface GroupProps {
 
 export function ExpenseGroup({ group }: GroupProps) {
   return (
-    <div>
+    <div className="expense_group">
       <h1>{group.name}</h1>
       <ul>
         {group.participators.map(participator => 

@@ -1,5 +1,6 @@
 import { Expense } from '@expense-splitter/shared/types.ts'
 import { useState } from 'react'
+import './Participator.css'
 
 
 interface ParticipatorProps{
@@ -35,7 +36,7 @@ export function Participator({ groupName, name, balance } : ParticipatorProps) {
   }
 
   return(
-    <li>
+    <li className="participator">
       <form onSubmit={handleExpense}>
         <p>{name}</p>
         <input id="expenseValue" type="number" value={amount} placeholder="Add an Expense" onChange={(e) => setAmount(e.target.value)}/>

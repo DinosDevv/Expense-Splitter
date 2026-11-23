@@ -1,12 +1,11 @@
 import './App.css'
-import { GroupForm } from './components/GroupForm'
-import { CreateGroup } from './components/CreateGroup'
+import { MainPage } from './pages/MainPage'
+
 
 function App() {
   return (
     <>
-      <GroupForm />
-      <CreateGroup />
+      <MainPage />
     </>
   )
 }
