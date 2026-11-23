@@ -19,8 +19,8 @@ function settleDebt(group: Group, expense: Expense) : Group{
 
   // Everyone gets his share
 
-  for(const participator of participators) participator.balance += expense.amount / participators.length
-  
+  for(const participator of participators) participator.balance += Math.round(expense.amount / participators.length)
+
   return group
 }
 

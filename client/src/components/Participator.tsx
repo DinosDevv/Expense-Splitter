@@ -18,7 +18,7 @@ export function Participator({ groupName, name, balance } : ParticipatorProps) {
     const expense : Expense = {
       groupName: groupName,
       name: name,
-      amount: Number(amount)
+      amount: Math.round(Number(amount) * 100)
     }
     try {
       const res = await fetch("/api/groups/handleExpense", {
@@ -40,7 +40,7 @@ export function Participator({ groupName, name, balance } : ParticipatorProps) {
         <p>{name}</p>
         <input id="expenseValue" type="number" value={amount} placeholder="Add an Expense" onChange={(e) => setAmount(e.target.value)}/>
         <button type="submit">+</button>
-        <p>{balance > 0 ? "Owes" : "Is Owed"} {Math.abs(balance)}</p>
+        <p>{balance > 0 ? "Owes" : "Is Owed"} {Math.abs(balance) / 100}€</p>
       </form>
     </li>
   )
