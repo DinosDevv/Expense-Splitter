@@ -13,7 +13,7 @@ export function MembersCard({ group } : compProps) {
           {group.participators.map(p => 
             <li key={p.name}>
               <p>{p.name}</p>
-              <p>{p.balance / 100}€</p>
+              <p>{p.balance < 0 ? "Is owed" : "Owes"} {Math.abs(p.balance / 100)}€</p>
             </li>
           )}
         </ul>

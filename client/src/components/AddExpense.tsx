@@ -99,10 +99,10 @@ export function AddExpense({ group }: AddExpenseProps) {
       <div className="right">
         <label htmlFor="preview">Preview</label>
         <div className="item">
-          <p>Pizza</p>
-          <p>32.00€</p>
+          <p>{description}</p>
+          <p>{amountCents / 100}</p>
         </div>
-        <p>Each Person will pay: 67.00€</p>
+        <p>Each Person will pay: {Math.round(amountCents / group.participators.length) / 100}</p>
       </div>
     </form>
   )
