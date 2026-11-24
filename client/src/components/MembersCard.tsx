@@ -1,4 +1,5 @@
 import './MembersCard.css'
+import { eurFormatter } from '@expense-splitter/shared/helpers'
 
 interface compProps {
   balances: {name: string, balance: number}[]
@@ -14,7 +15,7 @@ export function MembersCard({ balances } : compProps) {
           {balances.map(b => 
             <li key={b.name}>
               <p>{b.name}</p>
-              <p>{b.balance < 0 ? "Is owed" : "Owes"} {Math.abs(b.balance / 100)}€</p>
+              <p>{b.balance < 0 ? "Is owed" : "Owes"} {eurFormatter.format(Math.abs(b.balance / 100))}</p>
             </li>
           )}
         </ul>

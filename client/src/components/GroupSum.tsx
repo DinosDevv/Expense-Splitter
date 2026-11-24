@@ -1,5 +1,5 @@
 import './GroupSum.css'
-
+import { eurFormatter } from '@expense-splitter/shared/helpers'
 interface compProps {
   groupName: string
   numOfParticipators: number
@@ -14,7 +14,7 @@ export function GroupSum({groupName, numOfParticipators, totalExpenses} : compPr
       <div className="left">
         <h1>{groupName}</h1>
         <p>{numOfParticipators} members</p>
-        <h1>€{totalExpenses/100}</h1>
+        <h1>{eurFormatter.format(totalExpenses/100)}</h1>
         <p>Total Group expenses</p>
       </div>
       <div className="right">

@@ -64,5 +64,13 @@
   gap: 10px;
 }
 .preview_div{
-
+  display: flex;
+  flex-direction: column;
+}
+.preview_div label{
+  color: var(--primary);
+}
+.preview_item{
+  display: flex;
+  justify-content: space-between;
 }

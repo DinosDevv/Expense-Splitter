@@ -1,6 +1,7 @@
 import './AddExpense.css'
 import { Group } from '@expense-splitter/shared/types'
 import { useState } from "react"
+import { eurFormatter } from "@expense-splitter/shared/helpers"
 
 interface AddExpenseProps {
   group: Group
@@ -100,11 +101,11 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
       </div>
       <div className="preview_div">
         <label htmlFor="preview">Preview</label>
-        <div className="item">
-          <p>{description}</p>
-          <p>{amountCents / 100}</p>
+        <div className="preview_item">
+          <p>{description == "" ? "The item" : description}</p>
+          <p>{eurFormatter.format(amountCents / 100)}</p>
         </div>
-        <p>Each Person will pay: {Math.round(amountCents / group.participators.length) / 100}</p>
+        <p>Each Person will pay: {eurFormatter.format(Math.round(amountCents / group.participators.length) / 100)}</p>
       </div>
     </form>
   )
