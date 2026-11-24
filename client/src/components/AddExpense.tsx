@@ -49,10 +49,10 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
 
   return(
     <form onSubmit={handleExpense} className="add-expense">
-      <div className="left">
+      <div className="expense_div">
         <h1>Add Expense</h1>
 
-        <div>
+        <div className="expense_description">
           <label htmlFor="description">Description</label>
           <input
             id="description"
@@ -62,7 +62,7 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
           />
         </div>
 
-        <div>
+        <div className="expense_amount">
           <label htmlFor="amount">Amount (€)</label>
           <input
             id="amount"
@@ -76,7 +76,7 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
           />
         </div>
 
-        <div>
+        <div className="expense_payer">
           <label htmlFor="payer">Paid by</label>
           <select id="payer" value={payer} onChange={e => setPayer(e.target.value)} required>
             <option value="" disabled>Who paid?</option>
@@ -86,7 +86,7 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
           </select>
         </div>
 
-        <fieldset>
+        <fieldset className="split_between">
           <legend>Split between</legend>
           <button type="button">Everyone (Equally)</button>
           <button type="button" disabled>Custom Amounts</button>
@@ -94,11 +94,11 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
         </fieldset>
 
         {error && <p className="error">{error}</p>}
-        <button type="submit" disabled={saving}>
+        <button className="expense_button" type="submit" disabled={saving}>
           {saving ? "Adding…" : "Add Expense"}
         </button>
       </div>
-      <div className="right">
+      <div className="preview_div">
         <label htmlFor="preview">Preview</label>
         <div className="item">
           <p>{description}</p>
