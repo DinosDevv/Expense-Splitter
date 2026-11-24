@@ -29,7 +29,7 @@ export function AddExpense({ group }: AddExpenseProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           groupName: group.name,
-          name: payer,
+          paidBy: payer,
           description: description.trim(),
           amount: amountCents,
         }),

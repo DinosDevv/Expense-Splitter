@@ -3,3 +3,14 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.group_sum button{
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  color: var(--text);
+  background-color: var(--primary);
+  cursor: pointer;
+}
+.group_sum p {
+  color: var(--muted);
+}

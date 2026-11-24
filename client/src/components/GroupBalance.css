@@ -1,7 +1,7 @@
 .group_balance{
   display: flex;
   justify-content: space-between;
-  background-color: #1C1C28;
+  background-color: var(--card);
   border-radius: 15px;
   border: 2px solid #292A35;
   color: white;

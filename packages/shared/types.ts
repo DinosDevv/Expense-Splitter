@@ -13,7 +13,7 @@ export interface Participator {
 }
 export interface Expense {
   groupName: string,
-  name: string,
+  paidBy: string,
   description: string,
   amount: number
 }

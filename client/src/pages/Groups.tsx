@@ -2,6 +2,8 @@ import { Group } from "@expense-splitter/shared/types"
 import { useState, useEffect } from "react"
 import { CreateGroup } from "../components/CreateGroup"
 
+import './Groups.css'
+
 export function Groups() {
   const [groups, setGroups] = useState<Group[]>([])
   
@@ -14,7 +16,7 @@ export function Groups() {
   }, [])
   
   return (
-    <div>
+    <div className="group_list">
       {groups.map(g => 
         <a href={`groups/${g.name}`}>{g.name}</a>
       )}    

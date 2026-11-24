@@ -30,10 +30,10 @@ export function addExpense(expense : Expense) {
 
   // Each expense is subtracted from the creditor's balance
 
-  for(const participator of group.participators) if(participator.name === expense.name) participator.balance -= expense.amount
+  for(const participator of group.participators) if(participator.name === expense.paidBy) participator.balance -= expense.amount
   group = settleDebt(group, expense)
 
   replaceItem(group)
 
-  console.log(`${expense.name}: ${expense.amount}`)
+  console.log(`${expense.paidBy}: ${expense.amount}`)
 }
