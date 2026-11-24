@@ -20,6 +20,9 @@ export function HomePage() {
   // GroupSum 
   const [totalExpenses, setTotalExpenses] = useState(0)
 
+  // Members
+
+  const [balances, setBalances] = useState<{name: string, balance: number}[]>([])
 
   const loadGroup = useCallback(() => {
     fetch("/api/groups")
@@ -40,7 +43,22 @@ export function HomePage() {
       })
   }, [groupName])
 
+  const loadBalances = useCallback(() => {
+    fetch(`/api/groups/balances/${groupName}`)
+      .then((res) => res.json())
+      .then((json) => {
+        setBalances(json)
+      })
+  }, [])
+
+  const handleExpenseAdded = useCallback(() => {
+    loadGroup()
+    loadBalances()
+  }, [loadGroup, loadBalances])
+
+
   useEffect(() => { loadGroup() }, [loadGroup])
+  useEffect(() => { loadBalances() }, [loadBalances])
 
 
   if(!group) return <p>Loading...</p>
@@ -51,7 +69,7 @@ export function HomePage() {
         <GroupSum groupName={group.name} numOfParticipators={group.participators.length} totalExpenses={totalExpenses}/>
       </div>
       <div className="membersCard">
-        <MembersCard group={group}/>
+        <MembersCard balances={balances}/>
       </div>
       <div className="recentExpenses">
         <RecentExpenses />
@@ -60,7 +78,7 @@ export function HomePage() {
         <GroupBalance group={group}/>
       </div>
       <div className="addExpense">
-        <AddExpense group={group} onAdded={loadGroup}/>
+        <AddExpense group={group} onAdded={handleExpenseAdded}/>
       </div>
     </div>
   )
