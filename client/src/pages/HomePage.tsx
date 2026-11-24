@@ -51,6 +51,14 @@ export function HomePage() {
       })
   }, [])
 
+  const loadExpenses = useCallback(() => {
+    fetch("/api/groups")
+      .then((res) => res.json())
+      .then((json) => {
+        
+      })
+  }, [])
+
   const handleExpenseAdded = useCallback(() => {
     loadGroup()
     loadBalances()

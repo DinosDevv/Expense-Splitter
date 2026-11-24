@@ -1,5 +1,4 @@
 .members-card {
-  margin-bottom: 100px; /* TO BE REMOVED OBVIOUSLY */
   background-color: var(--card);
   border-radius: 15px;
   border: 2px solid #292A35;
