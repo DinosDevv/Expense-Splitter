@@ -1,5 +1,6 @@
 import { Group } from '@expense-splitter/shared/types.ts'
 import { useState } from 'react'
+import './CreateGroup.css'
 
 export function CreateGroup() {
   const [groupName, setGroupName] = useState("")
@@ -47,7 +48,7 @@ export function CreateGroup() {
   }
 
   return (
-    <form onSubmit={saveGroup}>
+    <form className="create_group" onSubmit={saveGroup}>
       <h1>Create new Group</h1>
       <input
         value={groupName}
