@@ -72,7 +72,7 @@ export function HomePage() {
         <RecentExpenses expenses={group.expenses}/>
       </div>
       <div className="groupBalance">
-        <GroupBalance expenses={group.expenses} group={group}/>
+        <GroupBalance group={group}/>
       </div>
       <div className="addExpense">
         <AddExpense group={group} onAdded={handleExpenseAdded}/>
