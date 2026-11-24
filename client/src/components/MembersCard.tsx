@@ -14,8 +14,13 @@ export function MembersCard({ balances } : compProps) {
         <ul>
           {balances.map(b => 
             <li key={b.name}>
-              <p>{b.name}</p>
-              <p>{b.balance < 0 ? "Is owed" : "Owes"} {eurFormatter.format(Math.abs(b.balance / 100))}</p>
+              <div className="member_name">
+                <div className="member_icon">
+                  <p>{b.name[0]}</p>
+                </div>
+                <p className="name_paragraph">{b.name}</p>
+              </div>
+              <p className="member_balance">{b.balance < 0 ? "Is owed" : "Owes"} {eurFormatter.format(Math.abs(b.balance / 100))}</p>
             </li>
           )}
         </ul>
