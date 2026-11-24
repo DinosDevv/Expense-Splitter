@@ -20,7 +20,7 @@ export function MembersCard({ balances } : compProps) {
                 </div>
                 <p className="name_paragraph">{b.name}</p>
               </div>
-              <p className="member_balance">{b.balance < 0 ? "Is owed" : "Owes"} {eurFormatter.format(Math.abs(b.balance / 100))}</p>
+              <p className="member_balance">{b.balance < 0 ? "Is owed" : b.balance > 0 ? "Owes" : ""} {eurFormatter.format(Math.abs(b.balance / 100))}</p>
             </li>
           )}
         </ul>
