@@ -46,7 +46,7 @@ export function HomePage() {
       .then((json) => {
         setBalances(json)
       })
-  }, [])
+  }, [groupName])
 
   const handleExpenseAdded = useCallback(() => {
     loadGroup()

@@ -1,5 +1,7 @@
 import './GroupSum.css'
 import { eurFormatter } from '@expense-splitter/shared/helpers'
+import bg from '../assets/img/paros.jpg'
+
 interface compProps {
   groupName: string
   numOfParticipators: number

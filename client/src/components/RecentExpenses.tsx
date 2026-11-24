@@ -14,8 +14,8 @@ export function RecentExpenses({ expenses } : compProps) {
         <h1>Recent Expenses</h1>
         <a href="#">See all →</a>
       </div>
-      {expenses.filter((e, idx) => idx > expenses.length - 5).map(e => 
-        <div className="expense_item">
+      {expenses.slice(-4).map(e => 
+        <div key={e.description} className="expense_item">
           <div className="left">
             <p>{e.description}</p>
             <p className="paidby_text">Paid by: {e.paidBy}</p>

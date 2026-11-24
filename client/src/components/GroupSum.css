@@ -2,6 +2,8 @@
   display:flex;
   flex-direction: row;
   justify-content: space-between;
+  border: 2px solid red;
+  height: 25rem;
 }
 .group_sum button{
   padding: 10px;
@@ -13,4 +15,8 @@
 }
 .group_sum p {
   color: var(--muted);
+}
+.group_sum img {
+  max-width: 100%;
+  max-height: 100%;
 }
