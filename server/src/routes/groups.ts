@@ -22,6 +22,14 @@ groupsRouter.get("/balances/:groupName", (req, res) => {
   res.json([...balances].map(([name, balance]) => ({ name, balance })))
 })
 
+
+groupsRouter.get("/group/:groupName", (req, res) => {
+  const group = getGroup(req.params.groupName)
+  if (!group) return res.status(404).json({ error: "Group not found" })
+
+  res.json(group)
+})
+
 groupsRouter.post("/handleExpense", (req, res) => {
   if(req.body) console.log(req.body)
   addExpense(req.body)

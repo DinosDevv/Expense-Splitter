@@ -1,6 +1,12 @@
+import { Expense } from '@expense-splitter/shared/types'
 import './RecentExpenses.css'
+import { eurFormatter } from '@expense-splitter/shared/helpers'
 
-export function RecentExpenses() {
+interface compProps {
+  expenses: Expense[]
+}
+
+export function RecentExpenses({ expenses } : compProps) {
   return(
     <div className="recent_expenses">
       
@@ -8,43 +14,17 @@ export function RecentExpenses() {
         <h1>Recent Expenses</h1>
         <a href="#">See all →</a>
       </div>
-      <div className="expense_item">
-        <div className="left">
-          <p>Pizza</p>
-          <p className="paidby_text">Paid by: Nosdi</p>
+      {expenses.filter((e, idx) => idx > expenses.length - 5).map(e => 
+        <div className="expense_item">
+          <div className="left">
+            <p>{e.description}</p>
+            <p className="paidby_text">Paid by: {e.paidBy}</p>
+          </div>
+          <div className="right">
+            <p>{eurFormatter.format(e.amount/100)}</p>
+          </div>
         </div>
-        <div className="right">
-          <p>€32.44</p>
-        </div>
-      </div>
-      <div className="expense_item">
-        <div className="left">
-          <p>Pizza</p>
-          <p className="paidby_text">Paid by: Nosdi</p>
-        </div>
-        <div className="right">
-          <p>€32.44</p>
-        </div>
-      </div>
-      <div className="expense_item">
-        <div className="left">
-          <p>Pizza</p>
-          <p className="paidby_text">Paid by: Nosdi</p>
-        </div>
-        <div className="right">
-          <p>€32.44</p>
-        </div>
-      </div>
-      <div className="expense_item">
-        <div className="left">
-          <p>Pizza</p>
-          <p className="paidby_text">Paid by: Nosdi</p>
-        </div>
-        <div className="right">
-          <p>€32.44</p>
-        </div>
-      </div>
-      
+      )}
     </div>
   )
 }

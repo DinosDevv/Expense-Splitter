@@ -25,21 +25,18 @@ export function HomePage() {
   const [balances, setBalances] = useState<{name: string, balance: number}[]>([])
 
   const loadGroup = useCallback(() => {
-    fetch("/api/groups")
+    fetch(`/api/groups/group/${groupName}`)
       .then((res) => res.json())
       .then((json) => {
-        for(const group of json) {
-          if(group.name === groupName) {
-            setGroup(group)
+        setGroup(json)
             
-            let total = 0
+        let total = 0
   
-            for(const expense of group.expenses) {
-              total += expense.amount
-            }
-            setTotalExpenses(total)
-          }
+        for(const expense of json.expenses) {
+          total += expense.amount
         }
+        setTotalExpenses(total)
+        
       })
   }, [groupName])
 
@@ -48,14 +45,6 @@ export function HomePage() {
       .then((res) => res.json())
       .then((json) => {
         setBalances(json)
-      })
-  }, [])
-
-  const loadExpenses = useCallback(() => {
-    fetch("/api/groups")
-      .then((res) => res.json())
-      .then((json) => {
-        
       })
   }, [])
 
@@ -80,7 +69,7 @@ export function HomePage() {
         <MembersCard balances={balances}/>
       </div>
       <div className="recentExpenses">
-        <RecentExpenses />
+        <RecentExpenses expenses={group.expenses}/>
       </div>
       <div className="groupBalance">
         <GroupBalance group={group}/>
