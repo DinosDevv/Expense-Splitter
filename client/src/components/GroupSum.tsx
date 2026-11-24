@@ -1,24 +1,20 @@
-import { Group } from "@expense-splitter/shared/types"
 import './GroupSum.css'
 
 interface compProps {
-  group: Group
+  groupName: string
+  numOfParticipators: number
+  totalExpenses: number
 }
 
-export function GroupSum({group} : compProps) {
-
-  let total : number = 0
-  for(const expense of group.expenses) {
-    total += expense.amount
-  }
+export function GroupSum({groupName, numOfParticipators, totalExpenses} : compProps) {
 
 
   return(
     <div className="group_sum">
       <div className="left">
-        <h1>{group.name}</h1>
-        <p>{group.participators.length} members</p>
-        <h1>€{total/100}</h1>
+        <h1>{groupName}</h1>
+        <p>{numOfParticipators} members</p>
+        <h1>€{totalExpenses/100}</h1>
         <p>Total Group expenses</p>
       </div>
       <div className="right">

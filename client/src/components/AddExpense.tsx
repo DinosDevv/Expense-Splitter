@@ -4,9 +4,10 @@ import { useState } from "react"
 
 interface AddExpenseProps {
   group: Group
+  onAdded: () => void
 }
 
-export function AddExpense({ group }: AddExpenseProps) {
+export function AddExpense({ group, onAdded }: AddExpenseProps) {
   const [description, setDescription] = useState("")
   const [amountInput, setAmountInput] = useState("")
   const [payer, setPayer] = useState("")
@@ -38,6 +39,7 @@ export function AddExpense({ group }: AddExpenseProps) {
       setDescription("")
       setAmountInput("")
       setPayer("")
+      onAdded()
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
     } finally {
