@@ -9,7 +9,6 @@ export interface Group {
 }
 export interface Participator {
   name: string,
-  balance: number
 }
 export interface Expense {
   groupName: string,

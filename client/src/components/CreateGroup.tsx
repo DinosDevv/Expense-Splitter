@@ -1,4 +1,4 @@
-import { Group, Participator } from '@expense-splitter/shared/types.ts'
+import { Group } from '@expense-splitter/shared/types.ts'
 import { useState } from 'react'
 
 export function CreateGroup() {
@@ -28,7 +28,7 @@ export function CreateGroup() {
 
     const group: Group = {
       name: groupName.trim(),
-      participators: partNames.map((name): Participator => ({ name, balance: 0 })),
+      participators: partNames.map(name => ({ name })),
       expenses: []
     }
 

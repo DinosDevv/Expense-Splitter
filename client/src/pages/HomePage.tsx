@@ -15,25 +15,7 @@ import './HomePage.css'
 export function HomePage() {
   const { groupName } = useParams()
   
-  let testGroup = {
-    "name": "asd",
-    "participators": [
-      {
-        "name": "asd",
-        "balance": -5567
-      },
-      {
-        "name": "asde",
-        "balance": 1133
-      },
-      {
-        "name": "asdef",
-        "balance": 4433
-      }
-    ],
-    "expenses": []
-  }
-  const [group, setGroup] = useState<Group>(testGroup)
+  const [group, setGroup] = useState<Group | null>(null)
 
   useEffect(() => {
     fetch("/api/groups")
@@ -43,9 +25,10 @@ export function HomePage() {
           if(group.name === groupName) setGroup(group)
         }
       })
-  }, [])
+  }, [groupName])
 
 
+  if(!group) return <p>Loading...</p>
 
   return (
     <div className="container">

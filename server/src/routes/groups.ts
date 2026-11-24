@@ -1,5 +1,6 @@
 import { Router } from "express"
-import { createGroup, getGroups, addExpense } from '../services/groups.js'
+import { createGroup, getGroups, addExpense, calculateBalances, getGroup } from '../services/groups.js'
+import { Group } from "@expense-splitter/shared/types.js"
 
 export const groupsRouter = Router() 
 
@@ -13,9 +14,14 @@ groupsRouter.post("/", (req, res) => {
 
   res.status(201).json(req.body);
 })
-groupsRouter.get("/handleExpense", (req, res) => {
-  res.send("OK")
+groupsRouter.get("/balances/:groupName", (req, res) => {
+  const group = getGroup(req.params.groupName)
+  if (!group) return res.status(404).json({ error: "Group not found" })
+  
+  const balances = calculateBalances(group)
+  res.json([...balances].map(([name, balance]) => ({ name, balance })))
 })
+
 groupsRouter.post("/handleExpense", (req, res) => {
   if(req.body) console.log(req.body)
   addExpense(req.body)
