@@ -2,8 +2,23 @@
   display:flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 2px solid red;
-  height: 25rem;
+  height: 20rem;
+  border-radius: 15px;
+  border: 2px solid #292A35;
+  padding: 1rem;
+  /* Gradient sits on top of the image: solid on the left for readable text,
+     fully transparent on the right so the image shows at full opacity. */
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(16, 16, 23, 0.95) 0%,
+      rgba(16, 16, 23, 0.7) 35%,
+      rgba(16, 16, 23, 0) 70%
+    ),
+    var(--group-sum-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .group_sum button{
   padding: 10px;

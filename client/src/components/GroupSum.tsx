@@ -12,7 +12,10 @@ export function GroupSum({groupName, numOfParticipators, totalExpenses} : compPr
 
 
   return(
-    <div className="group_sum">
+    <div
+      className="group_sum"
+      style={{ '--group-sum-bg': `url(${bg})` } as React.CSSProperties}
+    >
       <div className="left">
         <h1>{groupName}</h1>
         <p>{numOfParticipators} members</p>
