@@ -16,14 +16,16 @@ export function GroupSum({groupName, numOfParticipators, totalExpenses} : compPr
       className="group_sum"
       style={{ '--group-sum-bg': `url(${bg})` } as React.CSSProperties}
     >
-      <div className="left">
+      <div className="group_sum_header">
         <h1>{groupName}</h1>
         <p>{numOfParticipators} members</p>
-        <h1>{eurFormatter.format(totalExpenses/100)}</h1>
-        <p>Total Group expenses</p>
       </div>
-      <div className="right">
-        <button>View Details →</button>
+      <div className="group_sum_footer">
+        <div>
+          <p className="group_sum_total">{eurFormatter.format(totalExpenses/100)}</p>
+          <p>Total group expenses</p>
+        </div>
+        <button>View details →</button>
       </div>
     </div>
   )

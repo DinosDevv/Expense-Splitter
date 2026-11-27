@@ -51,7 +51,7 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
   return(
     <form onSubmit={handleExpense} className="add-expense">
       <div className="expense_div">
-        <h1>Add Expense</h1>
+        <h1><span className="add_icon">+</span> Add Expense</h1>
 
         <div className="expense_description">
           <label htmlFor="description">Description</label>
@@ -89,7 +89,7 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
 
         <fieldset className="split_between">
           <legend>Split between</legend>
-          <button type="button">Everyone (Equally)</button>
+          <button type="button" className="active">Everyone (Equally)</button>
           <button type="button" disabled>Custom Amounts</button>
           <button type="button" disabled>Percentages</button>
         </fieldset>
@@ -100,12 +100,15 @@ export function AddExpense({ group, onAdded }: AddExpenseProps) {
         </button>
       </div>
       <div className="preview_div">
-        <label htmlFor="preview">Preview</label>
+        <p className="preview_title">Preview</p>
         <div className="preview_item">
           <p>{description == "" ? "The item" : description}</p>
           <p>{eurFormatter.format(amountCents / 100)}</p>
         </div>
-        <p>Each Person will pay: {eurFormatter.format(Math.round(amountCents / group.participators.length) / 100)}</p>
+        <div className="preview_split">
+          <p className="preview_split_label">Each person will pay:</p>
+          <p className="preview_split_amount">{eurFormatter.format(Math.round(amountCents / group.participators.length) / 100)}</p>
+        </div>
       </div>
     </form>
   )

@@ -1,4 +1,117 @@
-.group_list{
-  margin-left: 250px;
-  
+.groups_page {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin: 3rem 3rem 3rem 18rem;
+  max-width: 1100px;
+  color: var(--text);
+}
+
+.groups_header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.groups_header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.groups_header p,
+.groups_empty {
+  color: var(--muted);
+}
+.groups_empty {
+  background-color: var(--card);
+  border: 1px dashed var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 2rem;
+  text-align: center;
+}
+
+.group_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.group_card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s, background-color 0.15s;
+}
+.group_card:hover {
+  border-color: rgba(121, 87, 245, 0.55);
+  background-color: #1E1E2C;
+  transform: translateY(-2px);
+}
+.group_card_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.group_card_top h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.group_card_chevron {
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.group_card:hover .group_card_chevron {
+  color: var(--secondary);
+}
+.group_card_meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.group_card_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.group_card_total {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Overlapping avatar stack */
+.group_card_avatars {
+  display: flex;
+}
+.group_card_avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  border: 2px solid var(--card);
+  margin-left: -0.5rem;
+}
+.group_card_avatar:first-child {
+  margin-left: 0;
+}
+.group_card_more {
+  background-color: var(--surface);
+  color: var(--muted);
 }

@@ -1,6 +1,7 @@
 import { Group } from '@expense-splitter/shared/types.ts'
 import { useState } from 'react'
 import './CreateGroup.css'
+import { memberColor } from '../memberColors'
 
 export function CreateGroup() {
   const [groupName, setGroupName] = useState("")
@@ -49,25 +50,46 @@ export function CreateGroup() {
 
   return (
     <form className="create_group" onSubmit={saveGroup}>
-      <h1>Create new Group</h1>
-      <input
-        value={groupName}
-        onChange={e => setGroupName(e.target.value)}
-        placeholder="Group name (e.g. Budapest trip)"
-        required
-      />
-      <input
-        value={partInput}
-        onChange={e => setPartInput(e.target.value)}
-        onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addParticipator() } }}
-        placeholder="Participator name"
-      />
-      <button type="button" onClick={addParticipator}>Add</button>
-      <ul>
-        {partNames.map(p => <li key={p}>{p}</li>)}
-      </ul>
-      {error && <p>{error}</p>}
-      <button type="submit">Create</button>
+      <h1><span className="create_group_icon">+</span> Create new Group</h1>
+
+      <div className="create_group_field">
+        <label htmlFor="group_name">Group name</label>
+        <input
+          id="group_name"
+          value={groupName}
+          onChange={e => setGroupName(e.target.value)}
+          placeholder="e.g. Budapest trip"
+          required
+        />
+      </div>
+
+      <div className="create_group_field">
+        <label htmlFor="participator">Members</label>
+        <div className="create_group_add">
+          <input
+            id="participator"
+            value={partInput}
+            onChange={e => setPartInput(e.target.value)}
+            onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addParticipator() } }}
+            placeholder="Participator name"
+          />
+          <button type="button" className="create_group_add_btn" onClick={addParticipator}>Add</button>
+        </div>
+      </div>
+
+      {partNames.length > 0 && (
+        <ul className="create_group_members">
+          {partNames.map((p, i) => (
+            <li key={p}>
+              <span className="create_group_avatar" style={{ backgroundColor: memberColor(i) }}>{p[0]}</span>
+              {p}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {error && <p className="create_group_error">{error}</p>}
+      <button type="submit" className="create_group_submit">Create Group</button>
     </form>
   )
 }

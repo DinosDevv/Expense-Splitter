@@ -1,11 +1,11 @@
 .group_sum {
-  display:flex;
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  height: 20rem;
-  border-radius: 15px;
-  border: 2px solid #292A35;
-  padding: 1rem;
+  min-height: 16rem;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border);
+  padding: 1.75rem;
   /* Gradient sits on top of the image: solid on the left for readable text,
      fully transparent on the right so the image shows at full opacity. */
   background-image:
@@ -20,18 +20,42 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.group_sum button{
-  padding: 10px;
-  border-radius: 20px;
-  border: none;
+.group_sum_header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--text);
-  background-color: var(--primary);
-  cursor: pointer;
+}
+.group_sum_header p {
+  margin-top: 0.35rem;
+}
+.group_sum_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
 }
 .group_sum p {
   color: var(--muted);
 }
-.group_sum img {
-  max-width: 100%;
-  max-height: 100%;
+.group_sum .group_sum_total {
+  font-size: 3.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.group_sum button {
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  color: var(--text);
+  background-color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(121, 87, 245, 0.35);
+}
+.group_sum button:hover {
+  filter: brightness(1.1);
 }

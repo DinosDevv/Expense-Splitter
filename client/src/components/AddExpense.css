@@ -1,35 +1,70 @@
 .add-expense {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 2rem;
   background-color: var(--card);
-  border-radius: 15px;
-  border: 2px solid #292A35;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border);
   color: var(--text);
+  padding: 1.75rem;
+}
+
+.expense_div{
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "description description"
+    "amount paid_by"
+    "split_between split_between"
+    "error error"
+    "button button";
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  /* vertical divider between the form and the preview */
+  padding-right: 2rem;
+  border-right: 1px solid var(--card-border);
+}
+.expense_div h1 {
+  grid-area: title;
+  font-size: 1.35rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.add_icon {
+  color: var(--primary);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.expense_div label,
+.split_between legend {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .expense_div input, .expense_div select {
-  background-color: #22222F;
-  border: 2px solid #2E2F3E;
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin-top: 0.5rem;
+  background-color: var(--surface);
+  border: 1px solid #2E2F3E;
+  height: 2.9rem;
+  padding: 0 1rem;
+  border-radius: 10px;
   color: var(--text);
   width: 100%;
-  /* height: 1.5rem;  ← remove */
-  padding: 0.5rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s;
 }
-.expense_div button{
-  background-color: var(--primary);
-  border: none;
-  padding: 0.5rem;
-  color: var(--text);
-  border-radius: 5px;
-  cursor: pointer;
+.expense_div input::placeholder {
+  color: var(--muted);
 }
-.expense_button{
-  grid-area: button;
+.expense_div input:focus, .expense_div select:focus {
+  border-color: var(--primary);
 }
+
 .expense_description{
   grid-area: description;
 }
@@ -39,38 +74,101 @@
 .expense_payer{
   grid-area: paid_by;
 }
-.expense_div, .preview_div{
-  padding: 1rem;
+.error {
+  grid-area: error;
+  color: #F87171;
+  font-size: 0.9rem;
 }
+
 .split_between{
   grid-area: split_between;
   display: flex;
-  justify-content: space-between;
-  border: 0px;
-  gap: 2px;
+  flex-wrap: wrap;
+  border: 0;
+  gap: 0.5rem;
+  min-width: 0;
 }
-.split_between button{
-  width: 100%;
+/* Floating the legend turns it into a normal flex item, so it can take the
+   first row on its own and leave the buttons on the row below */
+.split_between legend {
+  float: left;
+  flex-basis: 100%;
+  margin-bottom: 0;
 }
-.expense_div{
-  display: grid;
-  grid-template-areas:
-    "title title"
-    "description description"
-    "amount paid_by"
-    "split_between split_between"
-    "button button";  
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.split_between button {
+  flex: 1;
+  background-color: var(--surface);
+  border: 1px solid transparent;
+  color: var(--text);
+  padding: 0.85rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
+.split_between button.active {
+  background-color: rgba(121, 87, 245, 0.22);
+  border-color: rgba(121, 87, 245, 0.55);
+}
+.split_between button:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.expense_button{
+  grid-area: button;
+  background-color: var(--primary);
+  border: none;
+  height: 3rem;
+  color: var(--text);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.25rem;
+}
+.expense_button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.expense_button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
 .preview_div{
   display: flex;
   flex-direction: column;
+  background-color: #1F1F2C;
+  border-radius: 14px;
+  padding: 1.5rem;
+  align-self: start;
 }
-.preview_div label{
-  color: var(--primary);
+.preview_title {
+  color: var(--secondary);
+  font-weight: 600;
 }
 .preview_item{
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--card-border);
+  font-weight: 500;
+}
+.preview_item p:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.preview_split {
+  text-align: center;
+  padding-top: 1.25rem;
+}
+.preview_split_label {
+  color: var(--muted);
+}
+.preview_split_amount {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--secondary);
+  margin-top: 0.25rem;
 }
